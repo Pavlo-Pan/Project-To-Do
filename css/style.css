@@ -1,0 +1,388 @@
+/* Obschie klassy*/
+.flex-direction-column-gap-16 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+h2 {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24.2px;
+}
+
+input[type="text"]::placeholder,
+input[type="date"]::placeholder {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: #49454F;
+
+}
+
+/*-----------------------------------*/
+.app-todo {
+    width: 428px;
+    background-color: #FFFBFF;
+    border-radius: 8px;
+    padding: 24px 16px 16px 16px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.header-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.header-info p {
+    font-size: 15px;
+    line-height: 18.15px;
+}
+
+.search-box {
+    display: flex;
+}
+
+.search-box input,
+.search-box button {
+    background-color: rgba(29, 27, 32, 0.08);
+    border: none;
+    outline: none;
+}
+
+.search-box input {
+    flex-basis: 90%;
+    padding: 12px 0 12px 20px;
+    border-top-left-radius: 28px;
+    border-bottom-left-radius: 28px;
+}
+
+.search-box button {
+    flex-basis: 10%;
+    padding-right: 20px;
+    border-top-right-radius: 28px;
+    border-bottom-right-radius: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+}
+
+/* Work with to-do list*/
+.tabs {
+    display: flex;
+    padding: 4px 0px;
+}
+
+.tab {
+    flex: 1;
+    background-color: #FFFBFF;
+    border: solid 1px #79747E;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: #1D1B20;
+}
+
+.tab:first-child {
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    border-right: none;
+}
+
+.tab:last-child {
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    border-left: none;
+}
+
+.active {
+    background-color: #ccbce6;
+} 
+
+
+#tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    max-height: 200px;
+    /* Ограничение по высоте (пример: 300px) */
+    overflow-y: auto;
+    /* Вертикальная прокрутка */
+    border: 1px solid #ddd;
+    /* Для визуального разделения */
+    padding: 10px;
+    /* Отступы внутри контейнера */
+    border-radius: 5px;
+    /* Скругление углов */
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.addTask-button {
+    border-radius: 16px;
+    box-shadow: 0px 4px 8px 3px;
+    border: none;
+    outline: none;
+    padding: 19px;
+    background-color: #EBDEF7;
+    cursor: pointer;
+}
+
+.new-entry {
+    padding: 1px 16px 16px 16px;
+    background-color: #F7F2FA;
+    border-top-left-radius: 28px;
+    border-bottom-left-radius: 28px;
+
+}
+
+.new-entry hr {
+    margin: 16px auto;
+    height: 4px;
+    width: 32px;
+    background-color: #79747E;
+    border-radius: 100px;
+    border: none;
+
+}
+
+
+.dataEntry input {
+    border-radius: 4px;
+    outline: none;
+    padding: 16px;
+    background-color: #F7F2FA;
+    border: 1px solid #79747E;
+}
+
+.switch {
+    display: flex;
+    justify-content: space-between;
+}
+
+.slider {
+    display: none;
+}
+
+.buttonsEntry {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
+}
+
+#addNewEntryForm {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+}
+
+.dataEntry {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.buttonsEntry button {
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    border-radius: 100px;
+    letter-spacing: 0.1px;
+    outline: none;
+    cursor: pointer;
+}
+
+.buttonsEntry button[type="submit"] {
+    background-color: #6750A4;
+    color: #FFFFFF;
+    border: 1px solid #6750A4;
+
+}
+
+.buttonsEntry button[type="reset"] {
+    color: #6750A4;
+    background-color: #F7F2FA;
+    border: 1px solid #6750A4;
+}
+
+.hidden {
+    display: none;
+}
+
+.task-item {
+    display: flex;
+    /* Используем flexbox для выравнивания содержимого */
+    align-items: center;
+    /* Выравнивание по вертикали */
+    justify-content: space-between;
+    /* Пространство между текстом и кнопкой */
+    padding: 10px;
+    /* Отступы внутри задачи */
+    border-bottom: 1px solid #ddd;
+    /* Разделительная линия между задачами */
+}
+
+.task-item .completed {
+    text-decoration: line-through;
+    color: #9e9e9e;
+}
+
+.task-item button {
+    background-color: #6200ea;
+    ;
+    /* Цвет фона кнопки "Delete" */
+    color: white;
+    /* Цвет текста кнопки */
+    border: none;
+    /* Убираем стандартную рамку */
+    padding: 5px 10px;
+    /* Внутренние отступы кнопки */
+    border-radius: 5px;
+    /* Скруглённые углы */
+    cursor: pointer;
+    /* Курсор "рука" при наведении */
+}
+
+.task-item button:hover {
+    background-color: #381E72;
+    /* Темнее при наведении */
+}
+
+.task-item.undo-mode {
+    display: flex;
+    justify-content: center;
+    /* Центрирование содержимого по горизонтали */
+    align-items: center;
+    /* Центрирование содержимого по вертикали */
+    height: 60px;
+    /* Фиксированная высота задачи (по желанию) */
+    border: 1px solid #ddd;
+    /* Разделительная линия */
+    border-radius: 5px;
+    /* Скругление углов */
+    background-color: #f9f9f9;
+    /* Фон задачи в режиме Undo */
+}
+
+.task-item input {
+    width: 24px;
+    height: 24px;
+
+}
+
+.task-item input[type="checkbox"] {
+    color: #381E72;
+    border-color: #6200ea;
+}
+
+.task-content {
+    display: flex;
+    /* Располагаем элементы в строку */
+    align-items: center;
+    /* Выравниваем элементы по вертикали */
+    justify-content: space-between;
+    /* Пространство между элементами */
+    gap: 10px;
+    /* Расстояние между элементами */
+}
+
+.task-content span {
+    font-size: 16px;
+    color: #1D1B1E;
+}
+
+.task-content input {
+    margin-right: 10px;
+    /* Отступ чекбокса справа */
+}
+
+.task-content button {
+    margin-left: auto;
+    /* Кнопка удалена в правый край */
+}
+
+
+
+.task-date {
+    font-size: 12px;
+    color: #9e9e9e;
+    /* Бледный цвет для даты */
+    margin-bottom: 5px;
+    /* Отступ снизу */
+    text-align: left;
+    /* Выровнять дату влево */
+}
+
+
+
+.form_toggle {
+    position: relative;
+    width: 80px;
+    height: 32px;
+    background-color: #6750A4;
+    border-radius: 16px;
+}
+
+
+.circle {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.8s ease;
+    z-index: 1; /* Ниже радиокнопок */
+}
+
+.form_toggle input[type="radio"] {
+    position: absolute;;
+    opacity: 0; /* Прячем радиокнопки */
+    width: 50%;
+    height: 100%;
+    z-index: 2; /* Радиокнопки выше круга */
+    cursor: pointer;
+}
+#fid-1 {
+    left: 0; /* Радиокнопка "выключено" слева */
+}
+
+/* Вторая кнопка */
+#fid-2 {
+    right: 0; /* Радиокнопка "включено" справа */
+}
+#fid-1:checked ~ .circle {
+    transform: translateX(0); /* Исходное положение */
+}
+
+#fid-2:checked ~ .circle {
+    transform: translateX(46px); /* Перемещение вправо */
+content: url(../img/check.svg);
+
+}
+
+.highlight {
+    background-color: #ffeb3b; /* Желтая подсветка */
+    transition: background-color 0.5s ease; /* Плавное исчезновение */
+}
