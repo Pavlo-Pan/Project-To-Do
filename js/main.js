@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-   // console.log('DOM fully loaded and parsed.');
+    // console.log('DOM fully loaded and parsed.');
 
     const form = document.getElementById('addNewEntryForm');
     if (!form) {
@@ -9,26 +9,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', event => {
         event.preventDefault();
-       // console.log('Form submitted!');
+        // console.log('Form submitted!');
 
         const description = document.getElementById('descripionEntry');
         const date = document.getElementById('dataEntry');
         const reminder = document.querySelector('#fid-2');
 
         if (!description || !date || !reminder) {
-           // console.error('One of the inputs is missing!');
+            // console.error('One of the inputs is missing!');
             return;
         }
 
-       //console.log({
+        //console.log({
         ////    description: description.value,
-       //     date: date.value,
-       //     reminder: reminder.checked,
-       // });
+        //     date: date.value,
+        //     reminder: reminder.checked,
+        // });
     });
 });
 
-    const todoBody =document.body;
+const todoBody = document.body;
 //Page Loaded
 window.addEventListener('load', () => {
     todoBody.classList.add('page-loaded')
@@ -68,60 +68,85 @@ function startApp() {
         const year = date.getFullYear();
         const hours = date.getHours().toString().padStart(2, '0'); // Часы
         const minutes = date.getMinutes().toString().padStart(2, '0'); // Минуты
-    
+
         return `${day} ${month} ${year}, ${hours}:${minutes}`;
     }
 
-    const modal = document.querySelector('.modal'); // Модальное окно
-    const addTaskButton = document.querySelector('.addTask-button'); // Кнопка для добавления задачи
+    //const modal = document.querySelector('.modal'); // Модальное окно
+    // const addTaskButton = document.querySelector('.addTask-button'); // Кнопка для добавления задачи
     const taskList = document.getElementById('tasks');
     const form = document.getElementById('addNewEntryForm');
     const allTasksTab = document.getElementById('allTasks');
     const activeTasksTab = document.getElementById('activeTasks');
     const completedTasksTab = document.getElementById('completedTasks');
-    const resetBtn = document.getElementById('resetBtn');
+    // const resetBtn = document.getElementById('resetBtn');
 
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     let deleteTimeouts = {}; // Объект для хранения таймеров удаления
+    // Обработчик появления модального окна добавления новой задачи
+
+    document.querySelector('.addTask-button').addEventListener('click', () => {
+        document.querySelector('.modal').classList.add('active');
+        document.querySelector('.new-entry').classList.add('active');
+    });
+    // Обработчик закрытия модального окна добавления новой задачи
+    document.querySelector('button[type="reset"]').addEventListener('click', () => {
+        document.querySelector('.modal').classList.remove('active');
+        document.querySelector('.new-entry').classList.remove('active');
+    });
+    // Обработчик закрытия модального окна добавления новой задачи
+    document.querySelector('.modal').addEventListener('click', (event) => {
+        if (event.target === document.querySelector('.modal')) {
+            document.querySelector('.modal').classList.remove('active');
+            document.querySelector('.new-entry').classList.remove('active');
+        }
+    });
+    // Обработчик закрытия модального окна добавления новой задачи
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            document.querySelector('.modal').classList.remove('active');
+            document.querySelector('.new-entry').classList.remove('active');
+        }
+    });
 
     // Переключение видимости модального окна
-    addTaskButton.addEventListener('click', () => {
-        modal.classList.toggle('hidden'); // Добавляет/удаляет класс "hidden"
-        addTaskButton.classList.toggle('hidden');
-    });
-
-    resetBtn.addEventListener('click', () => {
-        modal.classList.toggle('hidden'); // Добавляет/удаляет класс "hidden"
-        addTaskButton.classList.toggle('hidden');
-    });
+    /*  addTaskButton.addEventListener('click', () => {
+         modal.classList.add('active'); // Добавляет/удаляет класс "hidden"
+         addTaskButton.classList.add('active');
+     });
+ 
+     resetBtn.addEventListener('click', () => {
+         modal.classList.remove('active'); // Добавляет/удаляет класс "hidden"
+         addTaskButton.classList.remove('active');
+     }); */
 
     function saveTasksToLocalStorage() {
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
-        function addTask(description, date, reminder) {
-            const task = { description, date, reminder, completed: false };
-            tasks.push(task);
-            saveTasksToLocalStorage();
-            renderTasks();
-        
-            if (reminder) {
-                const now = new Date();
-                const taskTime = new Date(date);
-                const timeUntilNotification = taskTime - now;
-        
-                //console.log({ now, taskTime, timeUntilNotification });
-        
-                if (timeUntilNotification > 0) {
-                    //console.log(`Scheduling alert in ${timeUntilNotification} milliseconds.`);
-                    setTimeout(() => {
-                        alert(`Reminder: ${description} is due at ${formatDate(date)}`);
-                    }, timeUntilNotification);
-                } else {
-                    //console.error('The date and time must be in the future.');
-                }
+    function addTask(description, date, reminder) {
+        const task = { description, date, reminder, completed: false };
+        tasks.push(task);
+        saveTasksToLocalStorage();
+        renderTasks();
+
+        if (reminder) {
+            const now = new Date();
+            const taskTime = new Date(date);
+            const timeUntilNotification = taskTime - now;
+
+            //console.log({ now, taskTime, timeUntilNotification });
+
+            if (timeUntilNotification > 0) {
+                //console.log(`Scheduling alert in ${timeUntilNotification} milliseconds.`);
+                setTimeout(() => {
+                    alert(`Reminder: ${description} is due at ${formatDate(date)}`);
+                }, timeUntilNotification);
+            } else {
+                //console.error('The date and time must be in the future.');
             }
         }
-        
+    }
+
 
     function deleteTask(index) {
         const taskItem = document.getElementById(`task-${index}`);
@@ -263,76 +288,76 @@ function startApp() {
         activeTab.classList.add('active');
     }
 
-    
+
     // Создаем SVG-элемент
-const svgIconHTML = `
+    const svgIconHTML = `
 <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M5.08331 8.1275L1.95581 5L0.890808 6.05751L5.08331 10.25L14.0833 1.25L13.0258 0.192505L5.08331 8.1275Z" fill="#1D192B"></path>
 </svg>
 `;
 
-// Добавляем обработчики на кнопки
-document.querySelectorAll('.tab').forEach(button => {
-button.addEventListener('click', () => {
-    // Убираем SVG из всех кнопок
-    document.querySelectorAll('.tab svg').forEach(svg => svg.remove());
+    // Добавляем обработчики на кнопки
+    document.querySelectorAll('.tab').forEach(button => {
+        button.addEventListener('click', () => {
+            // Убираем SVG из всех кнопок
+            document.querySelectorAll('.tab svg').forEach(svg => svg.remove());
 
-    // Убираем класс active у всех кнопок
-    document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
+            // Убираем класс active у всех кнопок
+            document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
 
-    // Добавляем класс active к текущей кнопке
-    button.classList.add('active');
+            // Добавляем класс active к текущей кнопке
+            button.classList.add('active');
 
-    // Добавляем SVG внутрь активной кнопки (например, после текста)
-    button.insertAdjacentHTML('afterbegin', svgIconHTML);
-});
-});
-
-// Инициализация для активной кнопки
-const activeButton = document.querySelector('.tab.active');
-if (activeButton) {
-activeButton.insertAdjacentHTML('afterbegin', svgIconHTML);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-   // console.log('DOM fully loaded and parsed.');
-
-    const form = document.getElementById('addNewEntryForm');
-    const radioButtons = document.querySelectorAll('input[name="radio"]'); // Группа радио-кнопок
-    let reminder = false; // По умолчанию выключен
-
-    // Добавляем слушатель событий на изменение состояния радио-кнопок
-    radioButtons.forEach(radio => {
-        radio.addEventListener('change', () => {
-            reminder = document.querySelector('input[name="radio"]:checked').value === 'on';
-           // console.log('Reminder updated:', reminder); // Лог для проверки
+            // Добавляем SVG внутрь активной кнопки (например, после текста)
+            button.insertAdjacentHTML('afterbegin', svgIconHTML);
         });
     });
 
-    form.addEventListener('submit', event => {
-        event.preventDefault();
-        //console.log('Form submitted!');
+    // Инициализация для активной кнопки
+    const activeButton = document.querySelector('.tab.active');
+    if (activeButton) {
+        activeButton.insertAdjacentHTML('afterbegin', svgIconHTML);
+    }
 
-        const description = document.getElementById('descripionEntry').value;
-        const date = document.getElementById('dataEntry').value;
+    document.addEventListener('DOMContentLoaded', () => {
+        // console.log('DOM fully loaded and parsed.');
 
-        if (!description || !date) {
-            //console.error('Description and date are required!');
-            return;
-        }
+        const form = document.getElementById('addNewEntryForm');
+        const radioButtons = document.querySelectorAll('input[name="radio"]'); // Группа радио-кнопок
+        let reminder = false; // По умолчанию выключен
 
-      //  console.log({
-      //      description,
-       //     date,
-      //      reminder, // Текущее состояние переключателя
-       // });
+        // Добавляем слушатель событий на изменение состояния радио-кнопок
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', () => {
+                reminder = document.querySelector('input[name="radio"]:checked').value === 'on';
+                // console.log('Reminder updated:', reminder); // Лог для проверки
+            });
+        });
 
-        addTask(description, date, reminder);
-        form.reset();
-        reminder = false; // Сбрасываем состояние после отправки
-        document.getElementById('fid-1').checked = true; // Устанавливаем переключатель в "off"
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            //console.log('Form submitted!');
+
+            const description = document.getElementById('descripionEntry').value;
+            const date = document.getElementById('dataEntry').value;
+
+            if (!description || !date) {
+                //console.error('Description and date are required!');
+                return;
+            }
+
+            //  console.log({
+            //      description,
+            //     date,
+            //      reminder, // Текущее состояние переключателя
+            // });
+
+            addTask(description, date, reminder);
+            form.reset();
+            reminder = false; // Сбрасываем состояние после отправки
+            document.getElementById('fid-1').checked = true; // Устанавливаем переключатель в "off"
+        });
     });
-});
     renderTasks(); // Рендер начальных задач
 
     // Объявляем глобальные функции для использования в событиях кнопок

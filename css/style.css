@@ -55,6 +55,7 @@ input[type="date"]::placeholder {
     border-radius: 8px;
     padding: 24px 16px 16px 16px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
 }
 
 body {
@@ -136,9 +137,7 @@ body {
     border-left: none;
 }
 
-.active {
-    background-color: #ccbce6;
-} 
+
 
 
 #tasks {
@@ -146,8 +145,9 @@ body {
     flex-direction: column;
     gap: 12px;
 
-    max-height: 200px;
-    /* Ограничение по высоте (пример: 300px) */
+    height: 380px;
+    max-height: 380px;
+    /* Ограничение по высоте (пример: 380px) */
     overflow-y: auto;
     /* Вертикальная прокрутка */
     border: 1px solid #ddd;
@@ -156,6 +156,7 @@ body {
     /* Отступы внутри контейнера */
     border-radius: 5px;
     /* Скругление углов */
+    scrollbar-color: #E8DEF8 #f0f0f0;
 }
 
 .footer {
@@ -175,10 +176,25 @@ body {
 }
 
 .new-entry {
+    height: 300px;
     padding: 1px 16px 16px 16px;
     background-color: #F7F2FA;
-    border-top-left-radius: 28px;
-    border-bottom-left-radius: 28px;
+    border-radius: 28px;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+
+}
+
+.new-entry.active {
+    opacity: 1;
+    transform: translateY(0);
 
 }
 
@@ -253,9 +269,9 @@ body {
     border: 1px solid #6750A4;
 }
 
-.hidden {
+/* .hidden {
     display: none;
-}
+} */
 
 .task-item {
     display: flex;
@@ -381,36 +397,65 @@ body {
     background-color: #fff;
     border-radius: 50%;
     transition: transform 0.8s ease;
-    z-index: 1; /* Ниже радиокнопок */
+    z-index: 1;
+    /* Ниже радиокнопок */
 }
 
 .form_toggle input[type="radio"] {
-    position: absolute;;
-    opacity: 0; /* Прячем радиокнопки */
+    position: absolute;
+    ;
+    opacity: 0;
+    /* Прячем радиокнопки */
     width: 50%;
     height: 100%;
-    z-index: 2; /* Радиокнопки выше круга */
+    z-index: 2;
+    /* Радиокнопки выше круга */
     cursor: pointer;
 }
+
 #fid-1 {
-    left: 0; /* Радиокнопка "выключено" слева */
+    left: 0;
+    /* Радиокнопка "выключено" слева */
 }
 
 /* Вторая кнопка */
 #fid-2 {
-    right: 0; /* Радиокнопка "включено" справа */
-}
-#fid-1:checked ~ .circle {
-    transform: translateX(0); /* Исходное положение */
+    right: 0;
+    /* Радиокнопка "включено" справа */
 }
 
-#fid-2:checked ~ .circle {
-    transform: translateX(46px); /* Перемещение вправо */
-content: url(../img/check.svg);
+#fid-1:checked~.circle {
+    transform: translateX(0);
+    /* Исходное положение */
+}
+
+#fid-2:checked~.circle {
+    transform: translateX(46px);
+    /* Перемещение вправо */
+    content: url(../img/check.svg);
 
 }
 
 .highlight {
-    background-color: #ffeb3b; /* Желтая подсветка */
-    transition: background-color 0.5s ease; /* Плавное исчезновение */
+    background-color: #ffeb3b;
+    /* Желтая подсветка */
+    transition: background-color 0.5s ease;
+    /* Плавное исчезновение */
+}
+
+.modal {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.32);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s;
+}
+
+.modal.active {
+    visibility: visible;
+    opacity: 1;
 }
