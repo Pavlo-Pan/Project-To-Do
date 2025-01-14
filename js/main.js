@@ -28,6 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+    const todoBody =document.body;
+//Page Loaded
+window.addEventListener('load', () => {
+    todoBody.classList.add('page-loaded')
+})
+
 function getCurrentDate() {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -174,6 +180,7 @@ function startApp() {
                 if (filter === 'active') return !task.completed;
                 if (filter === 'completed') return task.completed;
             })
+            .sort((a, b) => new Date(a.date) - new Date(b.date))
             .forEach((task, index) => {
                 const taskItem = document.createElement('li');
                 taskItem.id = `task-${index}`;
